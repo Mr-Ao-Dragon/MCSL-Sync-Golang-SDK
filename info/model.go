@@ -1,16 +1,26 @@
 package info
 
+import (
+	"net/url"
+	"time"
+)
+
 type CoreList []string
 type CoreInfo struct {
-	name             string
-	supportMcVersion []string
-	historyVersion   []string
-	versionData      map[string]CoreVersionInfo
+	Name             string
+	SupportMcVersion []string
+	HistoryVersion   map[string]CoreVersionInfo
 }
 type CoreVersionInfo struct {
-	targetMcVersion    string
-	requestJavaVersion int
-	downloadUrl        string
-	sha256             string
-	size               int
+	TargetMcVersion    string
+	SyncTime           time.Time
+	RequestJavaVersion int
+	DownloadUrl        url.URL
+	SHA256             string
+	Size               int
+}
+
+func NewCoreInfo() *CoreInfo {
+	info := new(CoreInfo)
+	return info
 }
