@@ -1,7 +1,7 @@
 package setup
 
 import (
-	"MCSL-Sync-Golang-SDK/get"
+	"MCSL-Sync-Golang-SDK/util"
 	"log"
 )
 
@@ -19,7 +19,7 @@ func initSetupData(ApiDomain string, isLatest bool, moreArgs ...string) *Client 
 	clientData := new(Client)
 	clientData.ApiDomain = ApiDomain
 	if isLatest {
-		versions, err := get.VersionList("release", true)
+		versions, err := util.VersionList("release", true)
 		if err != nil {
 			panic(err)
 		}

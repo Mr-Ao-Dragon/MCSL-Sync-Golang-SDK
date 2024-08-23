@@ -12,7 +12,11 @@ import (
 
 func (receiver *CoreInfo) GetTargetBuildInfo(setupData setup.Client, targetBuild string) []error {
 	request := gorequest.New()
-	_, body, httpErrs := request.Get(util.Https + setupData.ApiDomain + "/core/" + setupData.CoreName + "/" + setupData.MCVersion + "/" + targetBuild).
+	reqUrl := new(url.URL)
+	reqUrl.Scheme = "https"
+	reqUrl.Host = setupData.ApiDomain
+	reqUrl.Path = "/core/" + setupData.CoreName + "/" + setupData.MCVersion + "/" + targetBuild
+	_, body, httpErrs := request.Get(reqUrl.String()).
 		End()
 	if httpErrs != nil {
 		return httpErrs

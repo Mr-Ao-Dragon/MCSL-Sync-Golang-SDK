@@ -2,10 +2,10 @@ package info
 
 import (
 	"MCSL-Sync-Golang-SDK/setup"
-	"MCSL-Sync-Golang-SDK/util"
 	"errors"
 	"github.com/bytedance/sonic"
 	"github.com/parnurzeal/gorequest"
+	"net/url"
 )
 
 type coreListApiRepose struct {
@@ -36,7 +36,11 @@ func (receiver *CoreList) coreListAdd(name []string) {
 func (receiver *CoreList) ReadCoreList(setupData setup.Client) (errs []error) {
 	request := gorequest.New()
 	errs = make([]error, 0)
-	_, body, httpErrs := request.Get(util.Https + setupData.ApiDomain + "/core").End()
+	reqUrl := new(url.URL)
+	reqUrl.Scheme = "https"
+	reqUrl.Host = setupData.ApiDomain
+	reqUrl.Path = "/core"
+	_, body, httpErrs := request.Get(reqUrl.String()).End()
 	if httpErrs != nil {
 		errs = append(errs, httpErrs...)
 	}

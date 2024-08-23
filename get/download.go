@@ -9,11 +9,14 @@ import (
 )
 
 func Download(client setup.Client, info info.CoreVersionInfo, filename ...string) error {
-	if filename[0] == "" && len(filename) == 0 {
+	if len(filename) == 0 {
+		filename = append(filename, client.CoreName+"-"+info.TargetMcVersion+".jar")
+		log.Printf("filename is empty, use default filename: %s\n", filename[0])
+	} else if filename[0] == "" {
 		filename = append(filename, client.CoreName+"-"+info.TargetMcVersion+".jar")
 		log.Printf("filename is empty, use default filename: %s\n", filename[0])
 	}
-	if len(filename) > 0 {
+	if len(filename) > 1 {
 		return errors.New("too many filename")
 	}
 	err := getter.GetFile(client.TargetPath+"/"+filename[0], info.DownloadUrl.String())
