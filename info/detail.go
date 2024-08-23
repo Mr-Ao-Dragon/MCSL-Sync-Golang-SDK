@@ -27,9 +27,9 @@ func (receiver *CoreInfo) GetTargetBuildInfo(setupData setup.Client, targetBuild
 	dlUrl, _ := url.Parse(data.Data.Build.DownloadUrl)
 	buildData := CoreVersionInfo{
 		DownloadUrl:        *dlUrl,
-		TargetMcVersion:    data.Data.Build.McVersion,
+		TargetMcVersion:    (*data).Data.Build.McVersion,
 		RequestJavaVersion: util.JavaVersionCatch(setupData.MCVersion),
-		SyncTime:           data.Data.Build.SyncTime,
+		SyncTime:           (*data).Data.Build.SyncTime,
 	}
 	receiver.HistoryVersion[targetBuild] = buildData
 	return nil

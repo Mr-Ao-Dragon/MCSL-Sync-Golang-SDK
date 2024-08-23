@@ -41,7 +41,7 @@ func VersionList(versionType string, latest bool) (versions []string, errs []err
 		return nil, errs
 	}
 	if latest {
-		versions = append(versions, data.Latest.Release)
+		versions = append(versions, (*data).Latest.Release)
 		errs = nil
 		return
 	}

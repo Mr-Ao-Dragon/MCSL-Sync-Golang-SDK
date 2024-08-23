@@ -67,7 +67,7 @@ func (receiver *CoreInfo) GetCoreSupportMcList(setupData setup.Client) []error {
 	if (*data).Code != 200 {
 		return []error{errors.New(data.Msg)}
 	}
-	receiver.SupportMcVersion = data.Data.Versions
+	receiver.SupportMcVersion = (*data).Data.Versions
 	receiver.Name = setupData.CoreName
 	return nil
 }
@@ -83,7 +83,7 @@ func (receiver *CoreInfo) GetCoreBuildListSingleMCVersion(setupData setup.Client
 		return []error{err}
 	}
 	if (*data).Code != 200 {
-		return []error{errors.New(data.Msg)}
+		return []error{errors.New((*data).Msg)}
 	}
 	receiver.SupportMcVersion = append(receiver.SupportMcVersion, setupData.MCVersion)
 	for _, buildVerNum := range (*data).Data.Builds {
