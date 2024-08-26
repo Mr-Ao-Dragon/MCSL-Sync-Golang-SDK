@@ -1,7 +1,7 @@
 package setup
 
 import (
-	"MCSL-Sync-Golang-SDK/util"
+	"github.com/Mr-Ao-Dragon/MCSL-Sync-Golang-SDK/util"
 	"log"
 )
 

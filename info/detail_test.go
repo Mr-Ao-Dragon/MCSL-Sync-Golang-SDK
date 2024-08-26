@@ -1,7 +1,7 @@
 package info
 
 import (
-	"MCSL-Sync-Golang-SDK/setup"
+	"github.com/Mr-Ao-Dragon/MCSL-Sync-Golang-SDK/setup"
 	"reflect"
 	"testing"
 )

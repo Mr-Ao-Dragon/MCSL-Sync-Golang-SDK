@@ -1,9 +1,9 @@
 package info
 
 import (
-	"MCSL-Sync-Golang-SDK/setup"
-	"MCSL-Sync-Golang-SDK/util"
 	"errors"
+	"github.com/Mr-Ao-Dragon/MCSL-Sync-Golang-SDK/setup"
+	"github.com/Mr-Ao-Dragon/MCSL-Sync-Golang-SDK/util"
 	"github.com/bytedance/sonic"
 	"github.com/parnurzeal/gorequest"
 	"net/url"

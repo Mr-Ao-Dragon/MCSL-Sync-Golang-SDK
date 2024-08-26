@@ -1,8 +1,8 @@
 package get
 
 import (
-	"MCSL-Sync-Golang-SDK/info"
-	"MCSL-Sync-Golang-SDK/setup"
+	"github.com/Mr-Ao-Dragon/MCSL-Sync-Golang-SDK/info"
+	"github.com/Mr-Ao-Dragon/MCSL-Sync-Golang-SDK/setup"
 	"net/url"
 	"os"
 	"testing"

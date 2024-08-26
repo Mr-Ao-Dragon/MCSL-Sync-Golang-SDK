@@ -1,4 +1,4 @@
-module MCSL-Sync-Golang-SDK
+module github.com/Mr-Ao-Dragon/MCSL-Sync-Golang-SDK
 
 go 1.23.0
 

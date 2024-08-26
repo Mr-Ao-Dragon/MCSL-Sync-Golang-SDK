@@ -1,7 +1,7 @@
 package get
 
 import (
-	"MCSL-Sync-Golang-SDK/info"
+	"github.com/Mr-Ao-Dragon/MCSL-Sync-Golang-SDK/info"
 )
 
 type TaskObj struct {
