@@ -3,7 +3,6 @@ package get
 import (
 	"MCSL-Sync-Golang-SDK/info"
 	"MCSL-Sync-Golang-SDK/setup"
-	"log"
 	"net/url"
 	"os"
 	"testing"
@@ -45,6 +44,6 @@ func TestDownload(t *testing.T) {
 			}
 		})
 	}
-	log.Printf("cleanup")
+	t.Logf("cleanup")
 	_ = os.RemoveAll(userProfile + "\\AppData\\Local\\Temp\\*.jar")
 }

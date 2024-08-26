@@ -55,9 +55,9 @@ func VersionList(versionType string, latest bool) (versions []string, errs []err
 		errs = nil
 		return
 	}
-	for _, version := range data.Versions {
-		if version.Type == versionType {
-			versions = append(versions, version.Id)
+	for _, MCVersion := range data.Versions {
+		if MCVersion.Type == versionType {
+			versions = append(versions, MCVersion.Id)
 		}
 	}
 	errs = nil

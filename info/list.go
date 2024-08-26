@@ -39,7 +39,7 @@ func (receiver *CoreList) ReadCoreList(setupData setup.Client) (errs []error) {
 	reqUrl := new(url.URL)
 	reqUrl.Scheme = "https"
 	reqUrl.Host = setupData.ApiDomain
-	reqUrl.Path = "/core"
+	reqUrl.Path = "/api/core"
 	_, body, httpErrs := request.Get(reqUrl.String()).End()
 	if httpErrs != nil {
 		errs = append(errs, httpErrs...)
@@ -59,7 +59,14 @@ func (receiver *CoreList) ReadCoreList(setupData setup.Client) (errs []error) {
 }
 func (receiver *CoreInfo) GetCoreSupportMcList(setupData setup.Client) []error {
 	request := gorequest.New()
-	_, body, httpErrs := request.Get(setupData.ApiDomain + "/core/" + setupData.MCVersion).
+	reqUrl := new(url.URL)
+	reqUrl.Scheme = "https"
+	reqUrl.Host = setupData.ApiDomain
+	reqUrl.Path = "/api/core" + "/" + setupData.CoreName
+	if setupData.CoreName == "Arclight" {
+		return []error{errors.New("arclight is not supported")}
+	}
+	_, body, httpErrs := request.Get(reqUrl.String()).
 		End()
 	if httpErrs != nil {
 		return httpErrs
@@ -77,7 +84,11 @@ func (receiver *CoreInfo) GetCoreSupportMcList(setupData setup.Client) []error {
 }
 func (receiver *CoreInfo) GetCoreBuildListSingleMCVersion(setupData setup.Client) []error {
 	request := gorequest.New()
-	_, body, httpErrs := request.Get(setupData.ApiDomain + "/core/" + setupData.CoreName + "/" + setupData.MCVersion).
+	reqUrl := new(url.URL)
+	reqUrl.Scheme = "https"
+	reqUrl.Host = setupData.ApiDomain
+	reqUrl.Path = "/api/core/" + setupData.CoreName + "/" + setupData.MCVersion
+	_, body, httpErrs := request.Get(reqUrl.String()).
 		End()
 	if httpErrs != nil {
 		return httpErrs
@@ -90,12 +101,13 @@ func (receiver *CoreInfo) GetCoreBuildListSingleMCVersion(setupData setup.Client
 		return []error{errors.New((*data).Msg)}
 	}
 	receiver.SupportMcVersion = append(receiver.SupportMcVersion, setupData.MCVersion)
+	receiver.HistoryVersion = make(map[string]CoreVersionInfo)
 	for _, buildVerNum := range (*data).Data.Builds {
 		buildData := CoreVersionInfo{
 			TargetMcVersion: setupData.MCVersion,
 		}
 		receiver.HistoryVersion[buildVerNum] = buildData
 	}
-	defer wg.Done()
 	return nil
+
 }
