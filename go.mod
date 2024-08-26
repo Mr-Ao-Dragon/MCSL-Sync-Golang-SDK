@@ -4,7 +4,6 @@ go 1.23.0
 
 require (
 	github.com/bytedance/sonic v1.12.1
-	github.com/fatih/color v1.7.0
 	github.com/hashicorp/go-getter v1.7.6
 	github.com/hashicorp/go-version v1.7.0
 	github.com/parnurzeal/gorequest v0.3.0
@@ -33,8 +32,6 @@ require (
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/klauspost/compress v1.15.11 // indirect
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
-	github.com/mattn/go-colorable v0.0.9 // indirect
-	github.com/mattn/go-isatty v0.0.4 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/go-testing-interface v1.14.1 // indirect
 	github.com/moul/http2curl v1.0.0 // indirect
