@@ -12,12 +12,12 @@ func main() {
 	dirPath := "./"
 	suffix := "_test.go"
 	var wg sync.WaitGroup
-	ch := make(chan string, 100)
-	errs := make(chan error, 100)
+	results := make([]string, 0)
+	errs := make([]error, 100)
 	outputBytes := make([]byte, 100)
 	err := filepath.Walk(dirPath, func(path string, info fs.FileInfo, err error) error {
 		if err != nil {
-			errs <- err
+			errs = append(errs, err)
 		}
 		if !info.IsDir() && filepath.Ext(path) == suffix {
 			go func() {
@@ -25,9 +25,9 @@ func main() {
 				cmd := exec.Command("go", "test", path)
 				outputBytes, err = cmd.CombinedOutput()
 				if err != nil {
-					errs <- err
+					errs = append(errs, err)
 				}
-				ch <- string(outputBytes)
+				results = append(results, string(outputBytes))
 				defer wg.Done()
 			}()
 
@@ -35,20 +35,16 @@ func main() {
 		return nil
 	})
 	if err != nil {
-		errs <- err
+		errs = append(errs, err)
 	}
 	go func() {
 		wg.Wait()
 	}()
 	if len(errs) != 0 {
-		log.Fatalf("Error: %#v", <-errs)
+		log.Fatalf("Error: %#v", errs)
 	}
-	for Result := range ch {
+	for Result := range results {
 		log.Println(Result)
 	}
-	defer func() {
-		close(ch)
-		close(errs)
-	}()
 	return
 }
