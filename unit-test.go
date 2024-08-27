@@ -40,6 +40,14 @@ func main() {
 	go func() {
 		wg.Wait()
 	}()
+	for _, v := range errs {
+		if err != nil {
+			log.Printf("%v", v)
+		}
+	}
+	if errs != nil {
+		panic(errs)
+	}
 	if len(errs) != 0 {
 		log.Fatalf("Error: %#v", errs)
 	}
