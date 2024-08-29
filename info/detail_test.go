@@ -28,7 +28,7 @@ func TestCoreInfo_GetTargetBuildInfo(t *testing.T) {
 			args: args{
 				setupData: setup.Client{
 					ApiDomain: "sync.mcsl.com.cn",
-					CoreName:  "vanilla",
+					CoreName:  "Vanilla",
 					IsLatest:  true,
 					MCVersion: "1.20.4",
 				},
