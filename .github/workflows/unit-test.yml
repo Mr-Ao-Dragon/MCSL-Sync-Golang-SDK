@@ -29,7 +29,7 @@ jobs:
         env:
           GO111MODULE: on
       - name: Test with the Go CLI
-        run: go run unit-test.go
+        run: go run ./...
         env:
           CGO_ENABLED: 0
           GO111MODULE: on
